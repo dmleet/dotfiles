@@ -11,10 +11,12 @@ call plug#begin('~/.local/share/nvim/plugged')
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 
 " Language support
-Plug 'dense-analysis/ale'
+"Plug 'dense-analysis/ale'
 Plug 'rust-lang/rust.vim'
 Plug 'cespare/vim-toml'
 Plug 'stephpy/vim-yaml'
+Plug 'dag/vim-fish'
+Plug 'plasticboy/vim-markdown'
 
 " Fuzzy finder
 Plug 'junegunn/fzf'
@@ -38,13 +40,20 @@ let g:oceanic_next_terminal_bold = 1
 let g:oceanic_next_terminal_italic = 1
 colorscheme OceanicNext
 
+" rust
+let g:rustfmt_autosave = 1
+let g:rustfmt_emit_files = 1
+let g:rustfmt_fail_silently = 0
+let g:rust_clip_command = 'xclip -selection clipboard'
+
 " As-you-type autocomplete
 set completeopt=menu,menuone,preview,noselect,noinsert
-let g:ale_completion_enabled = 1
+set cmdheight=2
+set updatetime=300
 
-nnoremap <C-LeftMouse> :ALEGoToDefinition<CR>
-
-let g:ale_fixers = { 'rust': ['rustfmt', 'trim_whitespace', 'remove_trailing_lines'] }
+" ALE
+"let g:ale_completion_enabled = 1
+"let g:ale_fixers = { 'rust': ['rustfmt', 'trim_whitespace', 'remove_trailing_lines'] }
 
 " Editor
 filetype plugin indent on
@@ -55,8 +64,7 @@ set number
 set backspace=2
 set mouse=a
 set cc=80
-
-" https://github.com/vim/vim/issues/1735#issuecomment-383353563
+set emoji
 set lazyredraw
 set synmaxcol=500
 set laststatus=2
