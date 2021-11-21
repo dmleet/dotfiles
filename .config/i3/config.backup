@@ -1,17 +1,4 @@
-
-# This file is a modified version based on default i3-config-wizard config
-# source is available here:
-# https://raw.githubusercontent.com/endeavouros-team/endeavouros-i3wm-setup/master/.config/i3/config
-# Maintainer: joekamprad [joekamprad@endeavouros.com] 
-# https://endeavouros.com
-#
-# --> to update this run the following command (will backup existing setup file)
-# wget --backups=1 https://raw.githubusercontent.com/endeavouros-team/endeavouros-i3wm-setup/main/.config/i3/config -P ~/.config/i3/
-
-# Endeavouros-i3 config file
-# Source for complete framework of our i3 config and theming here: https://github.com/endeavouros-team/endeavouros-i3wm-setup
-# EndeavourOS wiki holds some Information also: https://endeavouros.com/docs/window-tiling-managers/i3-wm/
-# Please see http://i3wm.org/docs/userguide.html for the official i3 reference!
+# Leet i3 Config
 
 #######################
 # config starts here: #
@@ -21,7 +8,7 @@
 # is used in the bar {} block below.
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango:Noto Sans Regular 10
+font pango: Noto Sans 11
 
 # set the mod key to the winkey:
 set $mod Mod4
@@ -46,16 +33,18 @@ workspace_layout default
 ##############################
 
 #border indicator on windows: 
-new_window pixel 1
+default_border none
+default_floating_border pixel
+#new_window pixel 0
+
 
 # thin borders
 # hide_edge_borders both
+hide_edge_borders none
 
 # Set inner/outer gaps
 gaps inner 8
 gaps outer 4
-
-
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -70,7 +59,7 @@ bindsym $mod+6    workspace  $ws6
 bindsym $mod+7    workspace  $ws7
 bindsym $mod+8    workspace  $ws8
 bindsym $mod+9    workspace  $ws9
-bindsym $mod+0    workspace  $ws10
+bindsym $mod+0    workspace  $ws0
 
 # switch to workspace with numpad keys
 bindcode $mod+87 workspace 1
@@ -96,7 +85,6 @@ bindcode $mod+Mod2+80 workspace $ws8
 bindcode $mod+Mod2+81 workspace $ws9
 bindcode $mod+Mod2+90 workspace $ws10
 
-
 # move focused container to workspace
 bindsym $mod+Shift+1    move container to workspace  $ws1
 bindsym $mod+Shift+2    move container to workspace  $ws2
@@ -108,7 +96,6 @@ bindsym $mod+Shift+7    move container to workspace  $ws7
 bindsym $mod+Shift+8    move container to workspace  $ws8
 bindsym $mod+Shift+9    move container to workspace  $ws9
 bindsym $mod+Shift+0    move container to workspace  $ws10
-
 
 # move focused container to workspace with numpad keys
 bindcode $mod+Shift+Mod2+87 	move container to workspace  $ws1
@@ -135,36 +122,21 @@ bindcode $mod+Shift+81 	 move container to workspace  $ws9
 bindcode $mod+Shift+90 	 move container to workspace  $ws10
 
 # resize window (you can also use the mouse for that):
-#mode "resize" {
-# These bindings trigger as soon as you enter the resize mode
-# Pressing left will shrink the window’s width.
-# Pressing right will grow the window’s width.
-# Pressing up will shrink the window’s height.
-# Pressing down will grow the window’s height.
-#        bindsym j resize shrink width 10 px or 10 ppt
-#        bindsym k resize grow height 10 px or 10 ppt
-#        bindsym l resize shrink height 10 px or 10 ppt
-#        bindsym ntilde resize grow width 10 px or 10 ppt
-
-# same bindings, but for the arrow keys
-#	bindsym Left resize shrink width 10 px or 10 ppt
-#        bindsym Down resize grow height 10 px or 10 ppt
-#        bindsym Up resize shrink height 10 px or 10 ppt
-#        bindsym Right resize grow width 10 px or 10 ppt
-
-# back to normal: Enter or Escape
-#	bindsym Return mode "default"
-#        bindsym Escape mode "default"
-#}
-
-#bindsym $mod+r mode "resize"
+mode "resize" {
+	bindsym Left resize shrink width 10 px or 10 ppt
+	bindsym Down resize grow height 10 px or 10 ppt
+	bindsym Up resize shrink height 10 px or 10 ppt
+	bindsym Right resize grow width 10 px or 10 ppt
+	bindsym Escape mode "default"
+}
+bindsym $mod+r mode "resize"
 
 ######################################
 # keybindings for different actions: #
 ######################################
 
 # start a terminal
-bindsym $mod+Return exec xfce4-terminal
+bindsym $mod+Return exec alacritty
 
 # kill focused window
 bindsym $mod+c kill
@@ -277,8 +249,9 @@ bindsym XF86AudioPrev exec playerctl previous
 ## App shortcuts
 bindsym $mod+w exec /usr/bin/firefox
 bindsym $mod+n exec /usr/bin/thunar
-bindsym $mod+s exec /usr/bin/spotify
-bindsym Print exec "scrot ~/%Y-%m-%d-%T-screenshot.png"
+bindsym $mod+m exec /usr/bin/spotify
+bindsym Print exec /usr/bin/flameshot gui
+#bindsym Print exec "scrot ~/%Y-%m-%d-%T-screenshot.png"
 
 ##########################################
 # configuration for workspace behaviour: #
@@ -286,41 +259,46 @@ bindsym Print exec "scrot ~/%Y-%m-%d-%T-screenshot.png"
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-set $ws1 "1:"
-set $ws2 "2:"
-set $ws3 "3:"
-set $ws4 "4:"
-set $ws5 "5:"
-set $ws6 "6:♫"
-set $ws7 "7"
-set $ws8 "8"
-set $ws9 "9"
-set $ws10 "10"
+set $ws1 "1:  Terminal "
+set $ws2 "2:  Web "
+set $ws3 "3:  Files "
+set $ws4 "4:  Code "
+set $ws5 "5:  Chat "
+set $ws6 "6:  Music "
+set $ws7 "7:  Office "
+set $ws8 "8:  Design "
+set $ws9 "9:  Games "
+set $ws0 "0:  Settings "
 
 # use workspaces on different displays:
 # where you have to replace VGA-0/HDMI-0 with the names for your displays 
 # you can get from xrandr command
-#workspace $ws1 output VGA-0
-#workspace $ws2 output VGA-0
-#workspace $ws3 output HDMI-0
-#workspace $ws4 output HDMI-0
-#workspace $ws5 output HDMI-0
+workspace $ws1 output DP-2
+workspace $ws2 output DP-0
+workspace $ws5 output DP-4
 
 # bind program to workspace and focus to them on startup:
-assign [class="Xfce4-terminal"] $ws1
+assign [class="alacritty"] $ws1
 assign [class="(?i)firefox"] $ws2
 assign [class="Thunar"] $ws3
-assign [class="Steam"] $ws4
+assign [class="vscodium|geany"] $ws4
 assign [class="Discord"] $ws5
-assign [class="Spotify"] $ws6
+assign [class="spotify|audacity|vlc"] $ws6
+assign [class="Steam"] $ws9
 
 # automatic set focus new window if it opens on another workspace then the current:
-for_window [class=Xfce4-terminal] focus
+for_window [class=alacritty] focus
 for_window [class=(?i)firefox] focus
 for_window [class=Spotify] focus
 for_window [class=Thunar] focus
 for_window [class=Steam] focus
 for_window [class=Discord] focus
+
+for_window [class=calculator] floating enable
+
+for_window [class="alacritty"] resize set 640 480
+
+for_window [title="Friends List"] floating enable
 
 #############################################
 # autostart applications/services on login: #
@@ -343,7 +321,7 @@ exec --no-startup-id numlockx on
 
 # start a script to setup displays
 # uncomment the next line, use arandr to setup displays and save the file as monitor:
-#exec --no-startup-id ~/.screenlayout/monitor.sh
+exec --no-startup-id ~/.screenlayout/monitor.sh
 
 # start blueberry app for managing bluetooth devices from tray:
 exec --no-startup-id blueberry-tray
@@ -356,8 +334,8 @@ exec --no-startup-id picom -CGb
 exec --no-startup-id nm-applet
 
 # set wallpaper
-exec --no-startup-id nitrogen --restore
-exec --no-startup-id feh --bg-fill ~/.wallpaper/cp01.jpg
+#exec --no-startup-id nitrogen --restore
+exec --no-startup-id feh --bg-fill ~/.wallpaper.jpg
 
 #set powersavings for display:
 exec --no-startup-id xset s 480 dpms 600 600 600
@@ -366,8 +344,8 @@ exec --no-startup-id xset s 480 dpms 600 600 600
 exec --no-startup-id dbus-launch dunst --config ~/.config/dunst/dunstrc
 
 # Autostart apps as you like
-#exec --no-startup-id sleep 2 && xfce4-terminal
-exec --no-startup-id firefox https://github.com/endeavouros-team/endeavouros-i3wm-setup/blob/main/README.md
+#exec --no-startup-id sleep 2 && alacritty
+#exec --no-startup-id firefox
 #exec --no-startup-id sleep 3 && thunar
 
 # set floating (nontiling)for apps needing it
@@ -388,17 +366,17 @@ for_window [class="Pamac-manager"] floating enable
 ######################################
  
 # Define colors variables: 
-set $darkbluetrans	#08052be6
-set $darkblue		#08052b
-set $lightblue		#5294e2
-set $urgentred		#e53935
-set $white		#ffffff
-set $black		#000000
-set $purple		#e345ff
-set $darkgrey		#383c4a
-set $grey		#b0b5bd
-set $mediumgrey		#8b8b8b
-set $yellowbrown	#e1b700
+set $darkbluetrans	#82aaffe6
+set $darkblue		#82aaff
+set $lightblue		#5ca7e4
+set $urgentred		#ef5350
+set $white			#ffffff
+set $black			#011627
+set $purple			#c792ea
+set $darkgrey		#44596b
+set $grey			#b0b5bd
+set $mediumgrey		#bec5d4
+set $yellowbrown	#ffcb8b
 
 # define colors for windows:
 #class		        	border		bground		text		indicator	child_border
@@ -430,15 +408,16 @@ bar {
 strip_workspace_numbers yes
 ##strip_workspace_name no
 
-		    colors {
-		    separator          $purple
-		    background         $darkgrey
-		    statusline         $white
-#                          		border 		        bg		txt		indicator
+	colors {
+	    separator          	$purple
+	    background         	$darkgrey
+	    statusline         	$white
+
+                         	#border 		#bg			#txt		#indicator
 		focused_workspace	$mediumgrey	   	$grey		$darkgrey	$purple
-		active_workspace	$lightblue      	$mediumgrey	$darkgrey	$purple
-		inactive_workspace	$darkgrey   		$darkgrey	$grey		$purple
-		urgent_workspace	$urgentred	    	$urgentred	$white		$purple 
+		active_workspace	$lightblue      $mediumgrey	$darkgrey	$purple
+		inactive_workspace	$darkgrey   	$darkgrey	$grey		$purple
+		urgent_workspace	$urgentred	    $urgentred	$white		$purple 
 	}
 }
 
