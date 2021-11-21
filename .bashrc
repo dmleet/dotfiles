@@ -75,7 +75,7 @@ _CheckArchNews() {
     fi
 
     if [ "$CheckArchNewsForYou" = "yes" ] ; then
-        local news="$(yay -Pw)"
+        local news="$(paru -Pw)"
         if [ -n "$news" ] ; then
             echo "Arch news:" >&2
             echo "$news" >&2
@@ -113,17 +113,17 @@ UpdateAURPackages() {
     _CheckInternetConnection || return 1
 
     local updates
-    if [ -x /usr/bin/yay ] ; then
-        updates="$(yay -Qua)"
+    if [ -x /usr/bin/paru ] ; then
+        updates="$(paru -Qua)"
         if [ -n "$updates" ] ; then
             echo "Updates from AUR:" >&2
             echo "$updates" | sed 's|^|    |' >&2
-            _GeneralCmdCheck yay -Syua "$@"
+            _GeneralCmdCheck paru -Syua "$@"
         else
             echo "No AUR updates." >&2
         fi
     else
-        echo "Warning: /usr/bin/yay does not exist." >&2
+        echo "Warning: /usr/bin/paru does not exist." >&2
     fi
 }
 
@@ -186,5 +186,17 @@ _Pacdiff() {
 # alias ef='_open_files_for_editing'     # 'ef' opens given file(s) for editing
 # alias pacdiff=_Pacdiff
 ################################################################################
-alias config='/usr/bin/git --git-dir=/home/leet/.cfg/ --work-tree=/home/leet'
-alias discord='lightcord'
+
+
+
+. "$HOME/.cargo/env"
+
+# Completion for config alias
+source /usr/share/bash-completion/completions/git
+__git_complete config __git_main
+
+# Drop into fish
+if [[ $(ps --no-header --pid=$PPID --format=cmd) != "fish" && -z ${BASH_EXECUTION_STRING} ]]
+then
+	exec fish
+fi
