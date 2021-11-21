@@ -30,10 +30,10 @@ ShowInstallerIsoInfo() {
     fi
 }
 
-
-alias ls='ls --color=auto'
-alias ll='ls -lav --ignore=..'   # show long listing of all except ".."
-alias l='ls -lav --ignore=.?*'   # show long listing but no hidden dotfiles except "."
+# Removed in favor of exa in the fish config
+#alias ls='ls --color=auto'
+#alias ll='ls -lav --ignore=..'   # show long listing of all except ".."
+#alias l='ls -lav --ignore=.?*'   # show long listing but no hidden dotfiles except "."
 
 [[ "$(whoami)" = "root" ]] && return
 
