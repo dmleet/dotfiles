@@ -1,0 +1,14 @@
+{
+	"codeLens.enable": true,
+	"diagnostic.displayByAle": false,
+	"diagnostic.virtualText": true,
+	"diagnostic.errorSign": "E",
+	"diagnostic.warningSign": "W",
+	"diagnostic.infoSign": "I",
+	"diagnostic.hintSign": "H",
+	"diagnostic.checkCurrentLine": true,
+	"diagnostic.virtualTextCurrentLineOnly": false,
+	"diagnostic.virtualTextPrefix": " ■",
+	"diagnostic.virtualTextLines": 1,
+	"rust-analyzer.cargo.allFeatures": true
+}
